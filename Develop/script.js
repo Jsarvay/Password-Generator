@@ -2,37 +2,72 @@
 var generateBtn = document.querySelector("#generate");
 
 
-//functions to generate individual characters
-function randomUpper() {
-  return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
-}
-
-function randomLower() {
-  return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
-}
-
-function randomNumber() {
-  return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
-}
-
-function randomSpecial() {
-  var special = "!()-.?[]_`~;:!@#$%^&*+="
-  return special[Math.floor(Math.random() * special.length)]
-}
-
-console.log(randomSpecial())
+//variables for password characters
+var lCase = "abcdefghijklmnopqrstuvwxyz";
+var uCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var num = "0123456789";
+var special = "!()-.?[]_`~;:!@#$%^&*+=";
 
 // Write password to the #password input
 function writePassword() {
 
   //Ask prompts to get password variables
+  var length = Number(
+    prompt("How long would you like this password? Choose a value from 8-128")
+  )
+    if (length < 8) {
+      alert('Try Again, please choose a valid length');
+      return;
+    };
+    if (length > 128) {
+      alert('Try Again, please choose a valid length');
+      return;
+    }
   var lowerCase = confirm("Include Lower Case Letters?");
   var upperCase = confirm("Include Upper Case Letters?");
-  var numbers = confirm("Include numbers?");
-  var specialChars = confirm("Include Special Characters?")
+  var numbers = confirm("Include Numbers?");
+  var specialChars = confirm("Include Special Characters?");
 
+  //check prompts and add appropriate characters to possible options
+  var characters = "";
 
-  var password = generatePassword();
+  if (lowerCase === true) {
+    characters += lCase;
+  }
+
+  if (upperCase === true) {
+    characters += uCase;
+  }
+
+  if (numbers === true) {
+    characters += num;
+  }
+
+  if (specialChars === true) {
+    characters += special;
+  }
+
+  if (characters.length == 0) {
+    alert("Please select at least one character set")
+    return
+  }
+
+  characters.split("");
+
+  console.log(characters);
+
+  //function that reads through character string to select values at random to generate password
+
+  function generatePassword() {
+    var password ="";
+    for (var i = 0; i < length; i++); {
+    password += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return password;
+}
+
+  generatePassword();
+
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
