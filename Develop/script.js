@@ -48,25 +48,23 @@ function writePassword() {
   }
 
   if (characters.length == 0) {
-    alert("Please select at least one character set")
-    return
+    alert("Please select at least one character set");
+    return;
   }
 
-  characters.split("");
-
-  console.log(characters);
-
-  //function that reads through character string to select values at random to generate password
-
+  splitChar = characters.split("");
+ 
+  //function that reads through character string to select values at random to generate password based on length
   function generatePassword() {
-    var password ="";
-    for (var i = 0; i < length; i++); {
-    password += characters.charAt(Math.floor(Math.random() * characters.length));
+    var pass = "";
+    for (var i = 0; i < length; i++) {
+    pass += splitChar[(Math.floor(Math.random() * splitChar.length))];
   }
-  return password;
+  return pass;
 }
 
-  generatePassword();
+var password = generatePassword();
+
 
   var passwordText = document.querySelector("#password");
 
